@@ -10,8 +10,14 @@
     <title>Weather API</title>
 </head>
 <body>
-    <header class="container-fluid" id="header">
-        <h1 class="text-center text-light p-4" >Weather Dashboard</h1>
+    <header class="" id="header">
+        <div class="container px-4">
+            <div class="row gx-5">
+              <div class="col">
+                <h1 class="text-center text-light gx-4" >Weather Dashboard</h1>
+              </div>
+            </div>
+          </div>
     </header>
     <main class="container-fluid">
     <div class="row" id="">
@@ -21,11 +27,13 @@
               <input type="text" class="form-control" name="City">
               <button type="button" class="btn btn-primary" id="search-button">Search</button>
             </div>
+            <ul class="list-unstyled" id="saved-cities">
+            </ul>
         </div>
         <div class="col-9">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">City</h5>
+                    <p class="card-text">City</p>
                     <p class="card-text">Temp</p>
                     <p class="card-text">Wind</p>
                     <p class="card-text">Humidity</p>
@@ -35,49 +43,49 @@
                 <h5 class="card-title">5-Day forecast: </h5>
                 <div class="container">
                     <div class="row align-items-start">
-                        <div class="col" style="width: 18rem;">
+                        <div class="col bd-blue-800" style="width: 18rem;">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                                <li class="list-group-item">A fourth item</li>
-                                <li class="list-group-item">A fifth item</li>
+                                <li class="list-group-item">Date</li>
+                                <li class="list-group-item">Weather Symbol</li>
+                                <li class="list-group-item">Temp: F</li>
+                                <li class="list-group-item">Wind: MPH</li>
+                                <li class="list-group-item">Humidity: %</li>
                             </ul>
                         </div>
                         <div class="col" style="width: 18rem;">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                                <li class="list-group-item">A fourth item</li>
-                                <li class="list-group-item">A fifth item</li>
+                                <li class="list-group-item">Date</li>
+                                <li class="list-group-item">Weather Symbol</li>
+                                <li class="list-group-item">Temp: F</li>
+                                <li class="list-group-item">Wind: MPH</li>
+                                <li class="list-group-item">Humidity: %</li>
                             </ul>
                         </div>
                         <div class="col" style="width: 18rem;">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                                <li class="list-group-item">A fourth item</li>
-                                <li class="list-group-item">A fifth item</li>
+                                <li class="list-group-item">Date</li>
+                                <li class="list-group-item">Weather Symbol</li>
+                                <li class="list-group-item">Temp: F</li>
+                                <li class="list-group-item">Wind: MPH</li>
+                                <li class="list-group-item">Humidity: %</li>
                             </ul>
                         </div>
                         <div class="col" style="width: 18rem;">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                                <li class="list-group-item">A fourth item</li>
-                                <li class="list-group-item">A fifth item</li>
+                                <li class="list-group-item">Date</li>
+                                <li class="list-group-item">Weather Symbol</li>
+                                <li class="list-group-item">Temp: F</li>
+                                <li class="list-group-item">Wind: MPH</li>
+                                <li class="list-group-item">Humidity: %</li>
                             </ul>
                         </div>
                         <div class="col" style="width: 18rem;">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                                <li class="list-group-item">A fourth item</li>
-                                <li class="list-group-item">A fifth item</li>
+                                <li class="list-group-item">Date</li>
+                                <li class="list-group-item">Weather Symbol</li>
+                                <li class="list-group-item">Temp: F</li>
+                                <li class="list-group-item">Wind: MPH</li>
+                                <li class="list-group-item">Humidity: %</li>
                             </ul>
                         </div>
                     </div>

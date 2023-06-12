@@ -23,7 +23,11 @@ function getWeather() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
+            // console.log(data);
+            for(i=0; i<5; i++) {
+                var a = i * 8;
+                console.log(data.list[a]);
+            }
         })
     })
 }

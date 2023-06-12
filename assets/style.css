@@ -1,3 +1,11 @@
 header {
-    background-image: linear-gradient(to right, rgb(55, 122, 255), rgb(3, 3, 161)  )
+    background-image: linear-gradient(to right, rgb(55, 122, 255), rgb(3, 3, 120)  )
+}
+
+.weather-card {
+    background-color: rgb(37, 51, 83); 
+}
+
+.saved-cities {
+    visibility: hidden;
 }
