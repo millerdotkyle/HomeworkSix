@@ -6,6 +6,32 @@ header {
     background-color: rgb(37, 51, 83); 
 }
 
-.saved-cities {
+.hidden {
     visibility: hidden;
+}
+
+h5 {
+    font-weight: bolder;
+    display: inline;
+}
+
+.day-card{
+    background-color: rgb(50, 61, 79);
+}
+
+.day-card li{
+    color: white;
+    background-color: rgb(50, 61, 79);
+}
+.day-card img{
+    background-color: rgb(50, 61, 79);
+}
+
+.icon{
+    height: 50px;
+    width: 50px;
+}
+
+#saved-cities li{
+    display: block;
 }
