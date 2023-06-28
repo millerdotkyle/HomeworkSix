@@ -6,17 +6,22 @@ var searchBtn = document.getElementById("search-button");
 
 var prevSearches = JSON.parse(localStorage.getItem("savedsearches")) || [];
 
-var currentCity = $('input[name="City"]');
+var currentCity = $('input');
+
 
 //print any saved searches found in local storage
 printSavedCities(prevSearches);
 
-
 //calls other functions to save searched city and add to list, runs weather API calls and passes data to printing functions
-function getWeather() {
+function getWeather(query) {
+    console.log(query);
+    if(query ==='') {
+        query === currentCity;
+    }
+
     saveCity(prevSearches);
     printSavedCities(prevSearches);
-    fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + currentCity.val() + "&limit=1&appid=" + key)
+    fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + query + "&limit=1&appid=" + key)
     .then(function(response) {
         return response.json();
     })
@@ -30,9 +35,10 @@ function getWeather() {
             printForecast(data);
         })
     })
+    query = '';
 }
 
-searchBtn.addEventListener("click", getWeather);
+
 
 //creates top card with todays weather data
 function todayWeather(data) {
@@ -58,14 +64,14 @@ function printForecast (data) {
         a = i*8;
 
         newIcon = data.list[0].weather[0].icon;
-        var newcast = [dayjs(data.list[a].dt_txt).format('DD/MM/YYYY'), ' ', data.list[a].main.temp, data.list[a].wind.speed, data.list[a].main.humidity];
+        var newCast = [dayjs(data.list[a].dt_txt).format('DD/MM/YYYY'), ' ', data.list[a].main.temp, data.list[a].wind.speed, data.list[a].main.humidity];
         var units = [' ', ' ', '°F', 'MPH', '%']
 
         var div = $("<div>");
         var ul = $('<ul>');
 
         //nested loop creates elements, appends and styles
-        for(var j =0; j<newcast.length; j++) {
+        for(var j =0; j<newCast.length; j++) {
 
             //if statement to insert image where needed in list
             if(j===1) {
@@ -75,7 +81,7 @@ function printForecast (data) {
                 ul.append(img);
             } else{
                 let li = $("<li>");
-                li.text(newcast[j] + ' ' + units[j]);
+                li.text(newCast[j] + ' ' + units[j]);
                 li.addClass('list-group-item');
                 ul.append(li);
             }
@@ -95,13 +101,14 @@ function printForecast (data) {
 function printSavedCities (arr) {
 
     var ulEl = $('#saved-cities');
+    //remove existing list before printing new one
     ulEl.children().remove();
 
     //for loop goes length of data adding li elements to ul and stylizing them
     for(let i=0; i<arr.length; i++) {
         var li = $('<li>');
         li.text(arr[i]);
-        li.addClass('btn bg-secondary mt-2 mb-2');
+        li.addClass('btn bg-secondary mt-2 mb-2 city-button');
         ulEl.append(li);
     }
     ulEl.removeClass('hidden');
@@ -109,9 +116,45 @@ function printSavedCities (arr) {
 }
 
 
-//saves current searched city to localstorage
+//saves adds current searched city to list of searches, then saves to local storage
 function saveCity (prevSearches) {
-    prevSearches.push($('input').val());
+
+    var newCity = $('input').val();
+    var dupeCheck  = false;
+
+    //check if city already exists
+    for(var i =0; i<prevSearches.length; i++){
+        if(newCity === prevSearches[i]) {
+            dupeCheck = true;
+            break;
+        }
+    }
+
+    //if city is a new search, add it while removing oldest city if limit is reached
+    if(dupeCheck===false){
+        if(prevSearches.length >= 10){
+            prevSearches.pop();
+            prevSearches.unshift(newCity);
+        } else {
+            prevSearches.unshift(newCity);
+        }
+    }
+
+    
     localStorage.setItem('savedsearches', JSON.stringify(prevSearches));
 }
 
+$('.city-button').on('click', function() {
+    console.log($(this).text());
+    getWeather($(this).text());
+});
+
+// $('#search-button').on('click', function() {
+//     getWeather;
+// });
+
+
+// function clickedCity (this){
+//     var query = this.val();
+//     console.log(query);
+// }

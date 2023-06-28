@@ -35,3 +35,7 @@ h5 {
 #saved-cities li{
     display: block;
 }
+
+button {
+    width: 100%;
+}
