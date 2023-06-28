@@ -1,21 +1,18 @@
 var key = "9fbe4849e7907051c07050bc1201336d";
 
-
-
-
 var searchesDisplayEl = document.getElementById("searches");
 var searchBtn = document.getElementById("search-button");
 
 
 var prevSearches = JSON.parse(localStorage.getItem("savedsearches")) || [];
 
-
-
 var currentCity = $('input[name="City"]');
 
+//print any saved searches found in local storage
 printSavedCities(prevSearches);
 
 
+//calls other functions to save searched city and add to list, runs weather API calls and passes data to printing functions
 function getWeather() {
     saveCity(prevSearches);
     printSavedCities(prevSearches);
@@ -37,6 +34,7 @@ function getWeather() {
 
 searchBtn.addEventListener("click", getWeather);
 
+//creates top card with todays weather data
 function todayWeather(data) {
     console.log(data);
     var today = dayjs().format('M/DD/YYYY');
@@ -48,10 +46,14 @@ function todayWeather(data) {
     $('#today-humidity').text('Humidity: ' + data.list[0].main.humidity +'%');
 }
 
+
+//prints forecast to screen, takes data from API call
 function printForecast (data) {
     var cardEl = $('#forecast');
     cardEl.text("");
 
+
+    //loop to walk thru data, multiply the index to get next day in data
     for(var i=0; i<5; i++) {
         a = i*8;
 
@@ -62,7 +64,10 @@ function printForecast (data) {
         var div = $("<div>");
         var ul = $('<ul>');
 
+        //nested loop creates elements, appends and styles
         for(var j =0; j<newcast.length; j++) {
+
+            //if statement to insert image where needed in list
             if(j===1) {
                 var img = $('<img>');
                 img.attr('src', 'https://openweathermap.org/img/wn/' + data.list[a].weather[0].icon + '.png');
@@ -72,13 +77,10 @@ function printForecast (data) {
                 let li = $("<li>");
                 li.text(newcast[j] + ' ' + units[j]);
                 li.addClass('list-group-item');
-    
                 ul.append(li);
             }
 
         }
-
-
 
         ul.addClass('list-group list-group-flush');
         div.addClass('col day-card pl-2 pr-2');
@@ -88,11 +90,14 @@ function printForecast (data) {
 
 }
 
-function printSavedCities (arr) {
 
+//function to generate list from saved cities
+function printSavedCities (arr) {
 
     var ulEl = $('#saved-cities');
     ulEl.children().remove();
+
+    //for loop goes length of data adding li elements to ul and stylizing them
     for(let i=0; i<arr.length; i++) {
         var li = $('<li>');
         li.text(arr[i]);
@@ -103,7 +108,10 @@ function printSavedCities (arr) {
 
 }
 
+
+//saves current searched city to localstorage
 function saveCity (prevSearches) {
     prevSearches.push($('input').val());
     localStorage.setItem('savedsearches', JSON.stringify(prevSearches));
 }
+
