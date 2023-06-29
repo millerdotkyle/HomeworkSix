@@ -15,8 +15,9 @@ h5 {
     display: inline;
 }
 
-.day-card{
+.day-card ul{
     background-color: rgb(50, 61, 79);
+    width: 95%;
 }
 
 .day-card li{
